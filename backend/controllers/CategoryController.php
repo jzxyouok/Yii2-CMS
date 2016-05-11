@@ -4,7 +4,6 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Category;
-use backend\models\Category as CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +13,7 @@ use yii\filters\VerbFilter;
  */
 class CategoryController extends Controller
 {
+    public $category;
     /**
      * @inheritdoc
      */
@@ -37,12 +37,19 @@ class CategoryController extends Controller
     {
         $data = Category::find()->orderBy(['sort' => 'desc'])->asArray()->all();
         $lists = self::getLists($data);
-//        print_r($lists);
         return $this->render('index', [
             'lists' => $lists
         ]);
     }
 
+    /**
+     * 生成分类
+     * @param array $data
+     * @param int $parent_id
+     * @param int $level
+     * @param string $html
+     * @return array
+     */
     public function getLists(&$data = [], $parent_id = 0, $level = 0, $html = '|---')
     {
         $lists = [];
@@ -68,6 +75,17 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function beforeAction($action)
+    {
+        if (Yii::$app->request->isGet && $action->id == 'create' || $action->id == 'update'){
+            $data = Category::find()->orderBy(['sort' => 'desc'])->asArray()->all();
+            $category = self::getLists($data);
+            $category[] = ['id' => 0, 'name' => '顶级分类'];
+            $this->category = $category;
+        }
+        return true;
+    }
+
     /**
      * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -82,6 +100,7 @@ class CategoryController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'category' => $this->category
             ]);
         }
     }
