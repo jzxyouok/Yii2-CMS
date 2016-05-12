@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\components\Tree;
 use Yii;
 use common\models\Category;
 use yii\web\Controller;
@@ -36,31 +37,10 @@ class CategoryController extends Controller
     public function actionIndex()
     {
         $data = Category::find()->orderBy(['sort' => 'desc'])->asArray()->all();
-        $lists = self::getLists($data);
+        $lists = Tree::getLists($data);
         return $this->render('index', [
             'lists' => $lists
         ]);
-    }
-
-    /**
-     * 生成分类
-     * @param array $data
-     * @param int $parent_id
-     * @param int $level
-     * @param string $html
-     * @return array
-     */
-    public function getLists(&$data = [], $parent_id = 0, $level = 0, $html = '|---')
-    {
-        $lists = [];
-        foreach ($data as $value){
-            if ($value['parent_id'] == $parent_id) {
-                $value['name'] = str_repeat('&nbsp;&nbsp;', $level) . $value['name'];
-                $lists[] = $value;
-                $lists = array_merge($lists, self::getLists($data, $value['id'], $level + 1, $html));
-            }
-        }
-        return $lists;
     }
 
     /**
