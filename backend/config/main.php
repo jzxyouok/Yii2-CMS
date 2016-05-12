@@ -50,6 +50,12 @@ return [
         'admin' => [
             'class' => 'mdm\admin\Module',
         ],
+        'redactor' => [
+            'class' => 'yii\redactor\RedactorModule',
+            'uploadDir' => '@webroot/upload/images/' . date('Y') . '/' . date('m') .'/' . date('d'),
+            'uploadUrl' => '@web/upload/images/' . date('Y') . '/' . date('m') .'/' . date('d'),
+            'imageAllowExtensions'=>['jpg','png','gif'],
+        ],
     ],
     'aliases' => [
         '@mdm/admin' => '@vendor/mdmsoft/yii2-admin',
