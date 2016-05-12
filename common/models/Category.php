@@ -32,8 +32,10 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'parent_id', 'sort', 'status', 'created_at', 'updated_at'], 'required'],
+            [['name', 'parent_id', 'sort', 'status'], 'required'],
             [['parent_id', 'sort', 'status', 'created_at', 'updated_at'], 'integer'],
+            ['created_at', 'default', 'value' => time()],
+            ['updated_at', 'default', 'value' => time()],
             [['name'], 'string', 'max' => 32],
             [['remark'], 'string', 'max' => 255],
         ];
