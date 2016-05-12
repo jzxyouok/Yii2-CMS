@@ -120,6 +120,7 @@ class CategoryController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'category' => $this->category
             ]);
         }
     }
