@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         if (Yii::$app->request->isGet && $action->id == 'create' || $action->id == 'update'){
             $data = Category::find()->orderBy(['sort' => 'desc'])->asArray()->all();
-            $category = self::getLists($data);
+            $category = Tree::getLists($data);
             $category[] = ['id' => 0, 'name' => '顶级分类'];
             $this->category = $category;
         }
