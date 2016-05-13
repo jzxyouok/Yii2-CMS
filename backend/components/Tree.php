@@ -24,7 +24,7 @@ class Tree
         $lists = [];
         foreach ($data as $value){
             if ($value['parent_id'] == $parent_id) {
-                $value['name'] = str_repeat('&nbsp;&nbsp;', $level) . $value['name'];
+                $value['name'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $level) . $value['name'];
                 $lists[] = $value;
                 $lists = array_merge($lists, self::getLists($data, $value['id'], $level + 1, $html));
             }
