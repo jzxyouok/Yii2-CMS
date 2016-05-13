@@ -47,6 +47,8 @@ class Article extends ArticleModel
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],  //设置排序
+            'pagination' => ['pageSize' => 10]      //设置每页显示的数量
         ]);
 
         $this->load($params);
