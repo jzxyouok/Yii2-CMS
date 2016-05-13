@@ -29,13 +29,22 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'sub_title',
             'author',
             'source',
-            // 'created_at',
             // 'image',
             // 'summary',
 //             'content:ntext',
-             'hits',
-             'sort',
-             'status',
+            'hits',
+            'sort',
+            'created_at:date',
+            [
+                'attribute' => 'status',
+                'value' => function($model) {
+                    return $model->status == 0 ? '下架' : '显示';
+                },
+                'filter' => [
+                    0 => '下架',
+                    1 => '显示'
+                ]
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
