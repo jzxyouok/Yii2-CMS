@@ -38,37 +38,39 @@ use xj\uploadify\Uploadify;
         <div class="col-sm-6">
             <div class="form-group field-article-image">
                 <?php
-                echo Html::label($model->getAttributeLabel('image'), 'article-image', ['class' => 'control-label']);
-                echo Html::activeFileInput($model, 'image', ['id' => 'image']);
-                echo Uploadify::widget([
-                        'url' => yii\helpers\Url::to(['s-upload']),
-                        'id' => 'image',
-                        'csrf' => true,
-                        'renderTag' => false,
-                        'jsOptions' => [
-                            'width' => 150,
-                            'height' => 34,
-                            'onUploadError' => new JsExpression(<<<EOF
-                                function(file, errorCode, errorMsg, errorString) {
-                                    console.log('The file ' + file.name + ' could not be uploaded: ' + errorString + errorCode + errorMsg);
-                                }
-EOF
-                            ),
-                            'onUploadSuccess' => new JsExpression(<<<EOF
-                                function(file, data, response) {
-                                    data = JSON.parse(data);
-                                    if (data.error) {
-                                        console.log(data.msg);
-                                    } else {
-                                        console.log(data.fileUrl);
-                                        $('input[name="Article[image]"]').val(data.fileUrl);
-//                                        $('#image').append("<img src='" + data.webUrl + "' height=80 />");
+                    echo Html::label($model->getAttributeLabel('image'), 'article-image', ['class' => 'control-label']);
+                    echo Html::activeInput('hidden', $model, 'image');
+                    echo Html::fileInput('image', '', ['id' => 'image']);
+                    echo Uploadify::widget([
+                            'url' => yii\helpers\Url::to(['s-upload']),
+                            'id' => 'image',
+                            'csrf' => true,
+                            'renderTag' => false,
+                            'jsOptions' => [
+                                'width' => 150,
+                                'height' => 34,
+                                'onUploadError' => new JsExpression(<<<EOF
+                                    function(file, errorCode, errorMsg, errorString) {
+                                        console.log('The file ' + file.name + ' could not be uploaded: ' + errorString + errorCode + errorMsg);
                                     }
-                                }
 EOF
-                            ),
-                        ]
-                ]);
+                                ),
+                                'onUploadSuccess' => new JsExpression(<<<EOF
+                                    function(file, data, response) {
+                                        data = JSON.parse(data);
+                                        if (data.error) {
+                                            console.log(data.msg);
+                                        } else {
+                                            console.log(data.fileUrl);
+                                            $('input[name="Article[image]"]').val(data.fileUrl);
+    //                                        $('#image').append("<img src='" + data.webUrl + "' height=80 />");
+                                        }
+                                    }
+EOF
+                                ),
+                            ]
+                    ]);
+                    echo Html::error($model, 'image');
                 ?>
             </div>
         </div>
