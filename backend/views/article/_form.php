@@ -13,7 +13,8 @@ use xj\uploadify\Uploadify;
 
 <style type="text/css">
     .form-control {border-radius: 5px;}
-    .uploadify-button {border-radius: 0px}
+    .uploadify-button {border-radius: 0px;}
+    .redactor-editor {min-height: 400px;}
 </style>
 
 <div class="article-form">
