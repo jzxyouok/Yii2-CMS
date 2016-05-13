@@ -69,4 +69,13 @@ class Article extends \yii\db\ActiveRecord
             'status' => '状态',
         ];
     }
+
+    /**
+     * 关联Category表
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
 }
