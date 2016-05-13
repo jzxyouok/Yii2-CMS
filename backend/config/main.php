@@ -51,9 +51,9 @@ return [
             'class' => 'mdm\admin\Module',
         ],
         'redactor' => [
-            'class' => 'yii\redactor\RedactorModule',
-            'uploadDir' => '@webroot/upload/images/' . date('Y') . '/' . date('m') .'/' . date('d'),
-            'uploadUrl' => '@web/upload/images/' . date('Y') . '/' . date('m') .'/' . date('d'),
+            'class' => 'backend\components\RedactorModule',
+            'uploadDir' => '@webroot/upload/images',
+            'uploadUrl' => '@web/upload/images',
             'imageAllowExtensions'=>['jpg','png','gif'],
         ],
     ],
