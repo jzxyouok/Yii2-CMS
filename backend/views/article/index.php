@@ -25,13 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'category_id',
-//            'sub_title',
+            [
+                'attribute' => 'category_id',
+                'value' => function($model) {
+                    return $model->cname;
+                },
+            ],
             'author',
             'source',
-            // 'image',
-            // 'summary',
-//             'content:ntext',
             'hits',
             'sort',
             'created_at:date',

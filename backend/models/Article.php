@@ -41,7 +41,7 @@ class Article extends ArticleModel
      */
     public function search($params)
     {
-        $query = ArticleModel::find();
+        $query = ArticleModel::find()->joinWith('category')->select(['{{%article}}.*', '{{%category}}.name as cname']);
 
         // add conditions that should always apply here
 
