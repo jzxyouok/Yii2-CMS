@@ -19,12 +19,12 @@ class Tree
      * @param string $html
      * @return array
      */
-    public static function getLists(&$data = [], $parent_id = 0, $level = 0, $html = '|---')
+    public static function getLists(&$data = [], $parent_id = 0, $level = 0, $html = '|----')
     {
         $lists = [];
         foreach ($data as $value){
             if ($value['parent_id'] == $parent_id) {
-                $value['name'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $level) . $value['name'];
+                $value['name'] = str_repeat($html, $level) . $value['name'];
                 $lists[] = $value;
                 $lists = array_merge($lists, self::getLists($data, $value['id'], $level + 1, $html));
             }

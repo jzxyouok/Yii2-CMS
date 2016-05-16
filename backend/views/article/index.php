@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\Article */
@@ -27,9 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute' => 'category_id',
-                'value' => function($model) {
-                    return $model->cname;
-                },
+                'value' => 'category.name',
+                'filter' => ArrayHelper::map($category, 'id', 'name'),
             ],
             'author',
             'source',
@@ -41,10 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     return $model->status == 0 ? '下架' : '显示';
                 },
-                'filter' => [
-                    0 => '下架',
-                    1 => '显示'
-                ]
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

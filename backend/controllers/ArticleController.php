@@ -92,10 +92,12 @@ class ArticleController extends Controller
     {
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $category = Category::find()->orderBy(['sort' => 'desc'])->asArray()->all();
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'category' => Tree::getLists($category)
         ]);
     }
 
