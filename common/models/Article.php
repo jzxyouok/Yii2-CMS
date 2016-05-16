@@ -23,6 +23,7 @@ use Yii;
  */
 class Article extends \yii\db\ActiveRecord
 {
+    public $cname = '';
     /**
      * @inheritdoc
      */
