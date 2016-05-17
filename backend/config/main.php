@@ -47,7 +47,7 @@ return [
         ],
     ],
     'modules' => [
-        'admin' => [
+        'rbac' => [
             'class' => 'mdm\admin\Module',
         ],
         'redactor' => [

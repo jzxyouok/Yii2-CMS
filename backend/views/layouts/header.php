@@ -52,7 +52,7 @@ use yii\helpers\Html;
                             <div class="pull-left">
                                 <?= Html::a(
                                     '修改密码',
-                                    ['/admin/user/change-password'],
+                                    ['/rbac/user/change-password'],
                                     ['class' => 'btn btn-default btn-flat']
                                 ) ?>
                             </div>
