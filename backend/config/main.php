@@ -46,6 +46,10 @@ return [
             'defaultRoles' => ['guest'],
         ],
     ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' =>[]
+    ],
     'modules' => [
         'rbac' => [
             'class' => 'mdm\admin\Module',
@@ -60,8 +64,8 @@ return [
     'aliases' => [
         '@mdm/admin' => '@vendor/mdmsoft/yii2-admin',
     ],
-    'on beforeRequest' => function($event){
-        yii\base\Event::on(yii\db\BaseActiveRecord::className(), yii\db\BaseActiveRecord::EVENT_AFTER_UPDATE, ['backend\components\OperatedLog', 'write']);
-    },
+//    'on beforeRequest' => function($event){
+//        yii\base\Event::on(yii\db\BaseActiveRecord::className(), yii\db\BaseActiveRecord::EVENT_AFTER_UPDATE, ['backend\components\OperatedLog', 'write']);
+//    },
     'params' => $params,
 ];
