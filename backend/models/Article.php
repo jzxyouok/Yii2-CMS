@@ -18,7 +18,8 @@ class Article extends ArticleModel
     public function rules()
     {
         return [
-            [['id', 'category_id', 'created_at', 'hits', 'sort', 'status'], 'integer'],
+            [['id', 'category_id', 'hits', 'sort', 'status'], 'integer'],
+            [['created_at'], 'string'],
             [['title', 'sub_title', 'author', 'source', 'image', 'summary', 'content'], 'safe'],
         ];
     }
@@ -60,10 +61,16 @@ class Article extends ArticleModel
         }
 
         // grid filtering conditions
+        if ($this->created_at){
+            $createdAt = strtotime($this->created_at);
+            $createdAtEnd = $createdAt + 24*3600;
+            $query->andWhere("created_at >= {$createdAt} AND created_at <= {$createdAtEnd}");
+        }
+
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
-            'created_at' => $this->created_at,
+//            'created_at' => $this->created_at,
             'hits' => $this->hits,
             'sort' => $this->sort,
             'status' => $this->status,
