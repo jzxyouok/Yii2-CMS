@@ -45,6 +45,9 @@ return [
             'class' => 'yii\rbac\DbManager',
             'defaultRoles' => ['guest'],
         ],
+        'setting' => [
+            'class' => 'funson86\setting\Setting',
+        ],
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
@@ -59,6 +62,10 @@ return [
             'uploadDir' => '@webroot/upload/images',
             'uploadUrl' => '@web/upload/images',
             'imageAllowExtensions'=>['jpg','png','gif'],
+        ],
+        'setting' => [
+            'class' => 'funson86\setting\Module',
+            'controllerNamespace' => 'funson86\setting\controllers'
         ],
     ],
     'aliases' => [
